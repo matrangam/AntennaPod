@@ -12,6 +12,7 @@ android {
         // "1.2.3"          -> 1020395
         versionCode 2050296
         versionName "2.5.2"
+        ndkVersion "24.0.8215888"
 
         def commit = ""
         try {
