@@ -1,13 +1,14 @@
 buildscript {
     repositories {
         google()
-        mavenCentral()
+        mavenLocal()
         gradlePluginPortal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.0"
         classpath 'org.codehaus.groovy:groovy-xml:3.0.9'
+//        classpath 'build.flare:gradle-bazel-build-cache:1.0.0-alpha1'
     }
 }
 
@@ -15,7 +16,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://jitpack.io" }
+        flatDir {
+            dirs 'custom_libs'
+        }
     }
 }
 

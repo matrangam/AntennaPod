@@ -21,3 +21,41 @@ include ':ui:common'
 include ':ui:i18n'
 include ':ui:png-icons'
 include ':ui:statistics'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+
+    dependencies {
+        classpath files('custom_libs/gradle-bazel-build-cache-1.0.0-alpha1.jar')
+    }
+}
+
+import build.flare.gradle.bazel.cache.GradleBazelCache
+import build.flare.gradle.bazel.cache.GradleBazelCacheServiceFactory
+
+buildCache {
+    local {
+        enabled = false
+    }
+
+    // flare
+    registerBuildCacheService( GradleBazelCache.class, GradleBazelCacheServiceFactory.class )
+    remote( GradleBazelCache.class ) {
+        endpoint = 'grpcs://cache.bitrise.flare.build'
+        authToken = '3s_SFhSWWy33a3fkHqFC1'
+        instanceName = ''
+        enabled = true
+        push = true
+        debug = true
+        avoidUploads = false
+    }
+}

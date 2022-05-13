@@ -5,6 +5,9 @@ plugins {
 apply from: "../common.gradle"
 apply from: "../playFlavor.gradle"
 
+import build.flare.gradle.bazel.cache.GradleBazelCache
+import build.flare.gradle.bazel.cache.GradleBazelCacheServiceFactory
+
 android {
     defaultConfig {
         // Version code schema:
@@ -79,6 +82,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'custom_libs', include: '*.jar')
     implementation project(":core")
     implementation project(":event")
     implementation project(':model')
